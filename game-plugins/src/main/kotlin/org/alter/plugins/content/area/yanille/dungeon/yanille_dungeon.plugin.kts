@@ -59,43 +59,50 @@ on_obj_option(obj = Objs.PILE_OF_RUBBLE_23564, option = "Climb-Down") {
 //Orange Key Monkeybars
 on_obj_option(obj = Objs.MONKEYBARS_23567, option = "Swing across") {
 
-    if(!player.inventory.contains(Items.KEY_1544)) {
+    if (!player.inventory.contains(Items.KEY_1544)) {
         player.message("A Strange force hold you form swinging.")
         return@on_obj_option
     }
-    val endTile: Tile
-    val directionAngle: Int
-    val x = if (player.tile.x == 2598) 2599 else 2598
-    val z = if (player.tile.z == 9495) 9489 else 9495
-    val destination = Tile(x = x, z= z, 0)
-    val distance = player.tile.getDistance(destination)
-    directionAngle = if (player.tile.z == 9495) 0 else 2
-    player.lockingQueue(lockState = LockState.FULL) {
-        player.filterableMessage("You go...")
-        val movement = ForcedMovement.of(player.tile, destination, clientDuration1 = 80, clientDuration2 = 125, directionAngle = 1, lockState = LockState.FULL)
-        player.animate(742)
-        player.faceTile(destination)
-        wait(1)
-        player.crossMonkeybars(movement)
-        wait(distance)
-        player.animate(743)
-        wait(1)
-        player.resetRenderAnimation()
-        player.filterableMessage("You are done...")
+    val obj = player.getInteractingGameObj()
+    val isNorth = player.tile.z > obj.tile.z
+    val offsetZ = if (isNorth) -1 else 1
+    val monkeyBarsStartTile = Tile(obj.tile.x + 1, obj.tile.z)
+    val monkeyBarsEndTile = Tile(obj.tile.x + 1, obj.tile.z + 5 * offsetZ)
 
-    }
-}
-fun Player.crossMonkeybars(movement: ForcedMovement) {
-    queue {
+    player.lockingQueue() {
+        if (player.tile != monkeyBarsStartTile) {
+            val distance = player.tile.getDistance(monkeyBarsStartTile)
+            player.walkTo(monkeyBarsStartTile)
+            wait(distance + 2)
+        } else {
+            wait(2)
+        }
+
+        player.faceTile(Tile(obj.tile.x + 1, obj.tile.z + offsetZ))
+        wait(1)
+
+        // Loop for forced movement
+        for (i in 1..5) {
+            player.animate(if (i == 1) 742 else 744)
+            player.queue {
+                val move = ForcedMovement.of(
+                    player.tile, Tile(obj.tile.x + 1, obj.tile.z + i * offsetZ),
+                    clientDuration1 = if (i == 1) 25 else 25, clientDuration2 = 60,
+                    directionAngle = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal,
+                    lockState = LockState.NONE
+                )
+                player.animate(744)
+                player.forceMove(this, move)
+            }
+            player.animate(744)
+            wait(1)
+        }
         player.animate(744)
-        forceMove(this, movement)
-        wait(1)
+        waitTile(monkeyBarsEndTile)
+        player.animate(743)
     }
+
 }
-
-
-
-
 //Pipe
 on_obj_option(obj = Objs.OBSTACLE_PIPE_23140, option = "Squeeze-through") {
     player.queue {

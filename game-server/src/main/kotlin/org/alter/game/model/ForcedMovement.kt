@@ -1,6 +1,7 @@
 package org.alter.game.model
 
-import kotlin.math.max
+import kotlin.math.*
+
 /**
  * @author Tom <rspsmods@gmail.com>
  */
@@ -12,7 +13,7 @@ data class ForcedMovement internal constructor(private val initialTile: Tile, in
         get() = destinations.last()
 
     internal val maxDuration: Int
-        get() = Math.max(clientDuration1, clientDuration2)
+        get() = max(clientDuration1, clientDuration2)
 
     internal val diffX1: Int
         get() {
@@ -68,14 +69,14 @@ data class ForcedMovement internal constructor(private val initialTile: Tile, in
         return result
     }
 
-companion object {
+    companion object {
 
-    fun of(src: Tile, dst: Tile, clientDuration1: Int, clientDuration2: Int, directionAngle: Int, lockState: LockState): ForcedMovement {
-        return ForcedMovement(src, arrayOf(dst), clientDuration1, clientDuration2, directionAngle, lockState)
-    }
+        fun of(src: Tile, dst: Tile, clientDuration1: Int, clientDuration2: Int, directionAngle: Int, lockState: LockState): ForcedMovement {
+            return ForcedMovement(src, arrayOf(dst), clientDuration1, clientDuration2, directionAngle, lockState)
+        }
 
-    fun of(src: Tile, dst1: Tile, dst2: Tile, clientDuration1: Int, clientDuration2: Int, directionAngle: Int, lockState: LockState): ForcedMovement {
-        return ForcedMovement(src, arrayOf(dst1, dst2), clientDuration1, clientDuration2, directionAngle, lockState)
+        fun of(src: Tile, dst1: Tile, dst2: Tile, clientDuration1: Int, clientDuration2: Int, directionAngle: Int, lockState: LockState): ForcedMovement {
+            return ForcedMovement(src, arrayOf(dst1, dst2), clientDuration1, clientDuration2, directionAngle, lockState)
+        }
     }
-}
 }

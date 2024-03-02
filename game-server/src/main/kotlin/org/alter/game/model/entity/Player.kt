@@ -6,10 +6,7 @@ import org.alter.game.message.Message
 import org.alter.game.message.impl.*
 import org.alter.game.model.*
 import org.alter.game.model.appearance.Appearance
-import org.alter.game.model.attr.CURRENT_SHOP_ATTR
-import org.alter.game.model.attr.LEVEL_UP_INCREMENT
-import org.alter.game.model.attr.LEVEL_UP_OLD_XP
-import org.alter.game.model.attr.LEVEL_UP_SKILL_ID
+import org.alter.game.model.attr.*
 import org.alter.game.model.container.ItemContainer
 import org.alter.game.model.container.key.*
 import org.alter.game.model.interf.InterfaceSet
@@ -20,8 +17,7 @@ import org.alter.game.model.queue.QueueTask
 import org.alter.game.model.queue.TaskPriority
 import org.alter.game.model.skill.SkillSet
 import org.alter.game.model.social.Social
-import org.alter.game.model.timer.ACTIVE_COMBAT_TIMER
-import org.alter.game.model.timer.FORCE_DISCONNECTION_TIMER
+import org.alter.game.model.timer.*
 import org.alter.game.model.varp.VarpSet
 import org.alter.game.service.log.LoggerService
 import org.alter.game.sync.block.UpdateBlockType

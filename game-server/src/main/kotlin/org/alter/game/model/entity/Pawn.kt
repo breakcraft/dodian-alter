@@ -144,6 +144,10 @@ abstract class Pawn(val world: World) : Entity() {
      */
     private var futureRoute: FutureRoute? = null
 
+    var walkMask = 0
+
+    internal var lastAnimation = 0L
+
     /**
      * Handles logic before any synchronization tasks are executed.
      */
@@ -675,7 +679,7 @@ abstract class Pawn(val world: World) : Entity() {
         } else {
             world.collision
         }
-        return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision)
+        return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision, this)
     }
 
     companion object {
