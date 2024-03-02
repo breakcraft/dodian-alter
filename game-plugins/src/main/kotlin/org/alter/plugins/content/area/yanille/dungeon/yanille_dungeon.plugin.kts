@@ -87,8 +87,8 @@ on_obj_option(obj = Objs.MONKEYBARS_23567, option = "Swing across") {
             player.queue {
                 val move = ForcedMovement.of(
                     player.tile, Tile(obj.tile.x + 1, obj.tile.z + i * offsetZ),
-                    clientDuration1 = if (i == 1) 25 else 25, clientDuration2 = 60,
-                    directionAngle = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal,
+                    clientDuration1 = if (i == 1) 25 else 25, clientDuration2 = 40,
+                    directionAngle = if (isNorth) Direction.SOUTH.angle else Direction.NORTH.angle,
                     lockState = LockState.NONE
                 )
                 player.animate(744)
