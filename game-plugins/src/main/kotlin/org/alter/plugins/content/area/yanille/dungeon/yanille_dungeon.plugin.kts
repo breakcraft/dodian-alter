@@ -63,28 +63,36 @@ on_obj_option(obj = Objs.MONKEYBARS_23567, option = "Swing across") {
         player.message("A Strange force hold you form swinging.")
         return@on_obj_option
     }
-    val bars = player.getInteractingGameObj()
-    player.queue() {
-        val endTile: Tile
-        val directionAngle: Int
-        val x = if (player.tile.x == 2599) 2598 else 2599
-        val z = if (player.tile.z == 9495) 9489 else 9495
-        directionAngle = if (player.tile.z == 9498) Direction.SOUTH.angle else Direction.NORTH.angle
-        endTile = Tile(x = x, z = z)
+    val endTile: Tile
+    val directionAngle: Int
+    val x = if (player.tile.x == 2598) 2599 else 2598
+    val z = if (player.tile.z == 9495) 9489 else 9495
+    val destination = Tile(x = x, z= z, 0)
+    val distance = player.tile.getDistance(destination)
+    directionAngle = if (player.tile.z == 9495) 0 else 2
+    player.lockingQueue(lockState = LockState.FULL) {
+        player.filterableMessage("You go...")
+        val movement = ForcedMovement.of(player.tile, destination, clientDuration1 = 80, clientDuration2 = 125, directionAngle = 1, lockState = LockState.FULL)
         player.animate(742)
-        val cross = ForcedMovement.of(player.tile, endTile, clientDuration1 = 66, clientDuration2 = 120, directionAngle = directionAngle)
-        player.crossMonkeybars(cross)
+        player.faceTile(destination)
+        wait(1)
+        player.crossMonkeybars(movement)
+        wait(distance)
         player.animate(743)
+        wait(1)
+        player.resetRenderAnimation()
+        player.filterableMessage("You are done...")
+
     }
 }
-fun Player.crossMonkeybars(cross: ForcedMovement) {
+fun Player.crossMonkeybars(movement: ForcedMovement) {
     queue {
-        player.stopMovement()
-        wait(3)
-        animate(744)
-        forceMove(this, cross)
+        player.animate(744)
+        forceMove(this, movement)
+        wait(1)
     }
 }
+
 
 
 
