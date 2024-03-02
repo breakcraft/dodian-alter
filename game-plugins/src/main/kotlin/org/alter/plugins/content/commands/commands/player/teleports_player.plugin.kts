@@ -25,9 +25,6 @@ on_command("cath", description = "Teleports you to Catherby") {
 on_command("tav", description = "Teleports you to Taverley") {
     player.moveTo(Tile(x = 2891, z = 3454, height = 0))
 }
-on_command("gnome", description = "Teleports you to Gnome Stronghold") {
-    player.moveTo(Tile(x = 2461, z = 3443, height = 0))
-}
 on_command("fish", description = "Teleports you to Fishing Guild") {
     player.moveTo(Tile(x = 2597, z = 3409, height = 0))
 }
