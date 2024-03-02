@@ -17,6 +17,7 @@ import org.alter.game.model.interf.listener.PlayerInterfaceListener
 import org.alter.game.model.item.Item
 import org.alter.game.model.priv.Privilege
 import org.alter.game.model.queue.QueueTask
+import org.alter.game.model.queue.TaskPriority
 import org.alter.game.model.skill.SkillSet
 import org.alter.game.model.social.Social
 import org.alter.game.model.timer.ACTIVE_COMBAT_TIMER
@@ -208,7 +209,22 @@ open class Player(world: World) : Pawn(world) {
      * @see [org.alter.game.message.handler.MapBuildCompleteHandler]
      */
     var lastMapBuildTime = 0
+    fun setRenderAnimation(i: Int, delay: Int = -1, priority: TaskPriority = TaskPriority.STANDARD) {
+        if (delay > 0) {
+            queue(priority) {
+                setRenderAnimation(i)
+                wait(delay)
+                resetRenderAnimation()
+            }
+            return
+        }
+        appearance.renderAnim = i
+        addBlock(UpdateBlockType.APPEARANCE)
+    }
 
+    fun resetRenderAnimation() {
+        setRenderAnimation(-1)
+    }
     fun getSkills(): SkillSet = skillSet
 
     override val entityType: EntityType = EntityType.PLAYER

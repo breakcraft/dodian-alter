@@ -29,7 +29,7 @@ on_obj_option(23271, "cross") {
         }
     }
 
-    val movement = ForcedMovement.of(player.tile, endTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = directionAngle)
+    val movement = ForcedMovement.of(player.tile, endTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = directionAngle, lockState = LockState.FULL)
     player.crossDitch(movement)
 }
 

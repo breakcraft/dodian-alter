@@ -12,7 +12,7 @@ import org.alter.game.model.appearance.Looks.getTorsos
  * @author Tom <rspsmods@gmail.com>
  */
 data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gender) {
-
+    var renderAnim = -1
     /**
      * @param option - the specified look to select from the [Appearance]'s [looks]
      *      with valid options explicitly as follows:
