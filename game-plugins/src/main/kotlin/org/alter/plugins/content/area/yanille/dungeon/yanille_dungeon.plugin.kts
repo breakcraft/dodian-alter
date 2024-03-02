@@ -71,12 +71,10 @@ on_obj_option(obj = Objs.MONKEYBARS_23567, option = "Swing across") {
         val z = if (player.tile.z == 9495) 9489 else 9495
         directionAngle = if (player.tile.z == 9498) Direction.SOUTH.angle else Direction.NORTH.angle
         endTile = Tile(x = x, z = z)
-        player.filterableMessage("START ANIM QUEUE")
         player.animate(742)
         val cross = ForcedMovement.of(player.tile, endTile, clientDuration1 = 66, clientDuration2 = 120, directionAngle = directionAngle)
         player.crossMonkeybars(cross)
         player.animate(743)
-        player.filterableMessage("END OF ANIM QUEUE")
     }
 }
 fun Player.crossMonkeybars(cross: ForcedMovement) {
@@ -87,6 +85,8 @@ fun Player.crossMonkeybars(cross: ForcedMovement) {
         forceMove(this, cross)
     }
 }
+
+
 
 //Pipe
 on_obj_option(obj = Objs.OBSTACLE_PIPE_23140, option = "Squeeze-through") {
