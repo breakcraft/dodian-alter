@@ -20,7 +20,7 @@ on_command("seers", description = "Teleports you to Seers Village") {
     player.moveTo(Tile(x = 2725, z = 3484, height = 0))
 }
 on_command("cath", description = "Teleports you to Catherby") {
-    player.moveTo(Tile(x = 2875, z = 3451, height = 0))
+    player.moveTo(Tile(x = 2804, z = 3433, height = 0))
 }
 on_command("tav", description = "Teleports you to Taverley") {
     player.moveTo(Tile(x = 2891, z = 3454, height = 0))
