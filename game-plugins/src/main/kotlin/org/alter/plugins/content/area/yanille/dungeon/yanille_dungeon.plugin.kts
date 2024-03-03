@@ -51,9 +51,11 @@ on_obj_option(obj = Objs.STAIRCASE_15657, option = "Climb-Up") {
 }
 //Pile of ruble up to orange key boss.
 on_obj_option(obj = Objs.PILE_OF_RUBBLE_23563, option = "Climb-Up") {
+    player.animate(839)
     player.moveTo(2614, 9505)
 }
 on_obj_option(obj = Objs.PILE_OF_RUBBLE_23564, option = "Climb-Down") {
+    player.animate(839)
     player.moveTo(2616, 9571)
 }
 //Orange Key Monkeybars
@@ -104,25 +106,88 @@ on_obj_option(obj = Objs.MONKEYBARS_23567, option = "Swing across") {
 
 }
 //Pipe
+//TO-DO: Animation Timing need to be better.
 on_obj_option(obj = Objs.OBSTACLE_PIPE_23140, option = "Squeeze-through") {
-    player.queue {
-        val z = 9506
-        val x = if (player.tile.x == 2578) 2572 else 2578
-        player.animate(749)
-        player.moveTo(tile = Tile(x = x, z = z))
+    val obj = player.getInteractingGameObj()
+    val isWest = player.tile.x > obj.tile.x
+    val offsetX = if (isWest) -4 else 5
+    val PipeStartTile = Tile(obj.tile.x + 0, obj.tile.z)
+    val PipeEndTile = Tile(obj.tile.x + 1 + offsetX, obj.tile.z + 0)
+
+    player.lockingQueue() {
+        if (player.tile != PipeStartTile) {
+            val distance = player.tile.getDistance(PipeStartTile)
+            player.walkTo(PipeStartTile)
+            //wait(distance + 0)
+        } else {
+            wait(1)
+        }
+
+        player.faceTile(Tile(obj.tile.x + offsetX, obj.tile.z + 0))
+        wait(1)
+
+        // Loop for forced movement
+        for (i in 1..2) {
+            player.animate(if (i == 1) 749 else 746)
+            player.queue {
+                val move = ForcedMovement.of(
+                    player.tile, Tile(obj.tile.x + offsetX, obj.tile.z + 0),
+                    clientDuration1 = if (i == 1) 50 else 60, clientDuration2 = 60,
+                    directionAngle = if (isWest) Direction.WEST.angle else Direction.EAST.angle,
+                    lockState = LockState.NONE
+                )
+                player.animate(746)
+                player.forceMove(this, move)
+            }
+            wait(1)
+        }
+        waitTile(PipeEndTile)
+        player.animate(748)
     }
 }
 
 //Yellow Key Balancing ledge
+//TO-DO: Animation Timing need to be better.
 on_obj_option(obj = Objs.BALANCING_LEDGE_23548, option = "Walk-across") {
     if(!player.inventory.contains(Items.KEY_1544)) {
         player.message("A Strange force hold you form balancing.")
         return@on_obj_option
     }
-    player.queue {
-        val x = 2580
-        val z = if (player.tile.z == 9512) 9520 else 9512
-        player.animate(756)
-        player.moveTo(tile = Tile(x = x, z = z))
+    val obj = player.getInteractingGameObj()
+    val isNorth = player.tile.z > obj.tile.z
+    val offsetZ = if (isNorth) -1 else 1
+    val LedgeStartTile = Tile(obj.tile.x, obj.tile.z)
+    val LedgeEndTile = Tile(obj.tile.x, obj.tile.z + 9 * offsetZ)
+
+    player.lockingQueue() {
+        if (player.tile != LedgeStartTile) {
+            val distance = player.tile.getDistance(LedgeStartTile)
+            player.walkTo(LedgeStartTile)
+            wait(distance + 2)
+        } else {
+            wait(2)
+        }
+
+        player.faceTile(Tile(obj.tile.x + 0, obj.tile.z + offsetZ))
+        wait(1)
+
+        // Loop for forced movement
+        for (i in 1..7) {
+            player.animate(if (isNorth) 754 else 756)
+            player.queue {
+                val move = ForcedMovement.of(
+                    player.tile, Tile(obj.tile.x + 0, obj.tile.z + i * offsetZ),
+                    clientDuration1 = if (i == 1) 30 else 30, clientDuration2 = 30,
+                    directionAngle = if (isNorth) Direction.SOUTH.angle else Direction.NORTH.angle,
+                    lockState = LockState.NONE
+                )
+                player.animate(if (isNorth) 754 else 756)
+                player.forceMove(this, move)
+            }
+            player.animate(if (isNorth) 754 else 756)
+            wait(1)
+        }
+        player.animate(if (isNorth) 754 else 756)
+        waitTile(LedgeEndTile)
     }
 }
