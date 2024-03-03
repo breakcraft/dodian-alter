@@ -106,12 +106,13 @@ open class Player(world: World) : Pawn(world) {
 
     val varps = VarpSet(maxVarps = world.definitions.getCount(VarpDef::class.java))
 
-    private val skillSet = SkillSet(maxSkills = world.gameContext.skillCount)
+    val skillSet = SkillSet(maxSkills = world.gameContext.skillCount)
 
     /**
      * The options that can be executed on this player
      */
     val options = Array<String?>(10) { null }
+
 
     /**
      * Flag that indicates whether to refresh the shop the player currently
@@ -221,6 +222,12 @@ open class Player(world: World) : Pawn(world) {
     fun resetRenderAnimation() {
         setRenderAnimation(-1)
     }
+    /**
+     * Mining accumulator used for dragon pickaxe
+     */
+
+    var miningAccumulator: Double = 0.0
+
     fun getSkills(): SkillSet = skillSet
 
     override val entityType: EntityType = EntityType.PLAYER
