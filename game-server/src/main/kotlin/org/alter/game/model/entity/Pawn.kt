@@ -144,6 +144,10 @@ abstract class Pawn(val world: World) : Entity() {
      */
     private var futureRoute: FutureRoute? = null
 
+    var walkMask = 0
+
+    internal var lastAnimation = 0L
+
     /**
      * Handles logic before any synchronization tasks are executed.
      */
@@ -633,7 +637,21 @@ abstract class Pawn(val world: World) : Entity() {
     fun queue(priority: TaskPriority = TaskPriority.STANDARD, logic: suspend QueueTask.(CoroutineScope) -> Unit) {
         queues.queue(this, world.coroutineDispatcher, priority, logic)
     }
+    /**
+     * Adds a queue to the pawn that may lock
+     * them while the queue executes, and upon completion
+     * unlock the pawn
+     */
+    fun lockingQueue(priority: TaskPriority = TaskPriority.STANDARD, lockState: LockState = LockState.FULL, logic: suspend QueueTask.(CoroutineScope) -> Unit) {
 
+        // set the lockstate
+        lock = lockState
+
+        if (this is Player && priority == TaskPriority.STRONG) {
+            this.closeInterfaceModal()
+        }
+        queues.queue(this, world.coroutineDispatcher, priority, logic, lock = true)
+    }
     /**
      * Terminates any on-going [QueueTask]s that are being executed by this [Pawn].
      */
@@ -661,7 +679,7 @@ abstract class Pawn(val world: World) : Entity() {
         } else {
             world.collision
         }
-        return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision)
+        return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision, this)
     }
 
     companion object {

@@ -2,16 +2,15 @@ package org.alter.api.ext
 
 import org.alter.game.model.Area
 import org.alter.game.model.Tile
-import org.alter.game.model.timer.TimeConstants
 import org.alter.game.model.timer.TimerKey
 import org.alter.game.model.timer.TimerMap
 import java.text.DecimalFormat
 import java.text.Format
 import java.util.*
 import java.util.concurrent.ThreadLocalRandom
-import kotlin.math.roundToInt
+import kotlin.math.floor
 
-private val RANDOM = ThreadLocalRandom.current()
+val RANDOM = ThreadLocalRandom.current()
 
 fun Number.appendToString(string: String): String = "$this $string" + (if (this != 1) "s" else "")
 
@@ -27,18 +26,31 @@ fun String.parseAmount(): Long = when {
 }
 
 fun Int.interpolate(minChance: Int, maxChance: Int, minLvl: Int, maxLvl: Int): Int =
-        minChance + (maxChance - minChance) * (this - minLvl) / (maxLvl - minLvl)
+    minChance + (maxChance - minChance) * (this - minLvl) / (maxLvl - minLvl)
+
+fun Int.interpolate(minChance: Double, maxChance: Double, minLvl: Int, maxLvl: Int): Double =
+    minChance + (maxChance - minChance) * (this - minLvl) / (maxLvl - minLvl)
 
 fun Int.interpolate(minChance: Int, maxChance: Int, minLvl: Int, maxLvl: Int, cap: Int): Boolean =
-        RANDOM.nextInt(cap) <= interpolate(minChance, maxChance, minLvl, maxLvl)
+    RANDOM.nextInt(cap) <= interpolate(minChance, maxChance, minLvl, maxLvl)
 
+fun interpolate(low: Int, high: Int, level: Int): Int {
+    return floor(low * (99 - level) / 98.0 + floor(high * (level - 1) / 98.0) + 1).toInt()
+}
 /**
  * Get time left from a [TimerKey], in minutes.
  *
  * @return
  * Null if the minutes left is less than 1 (one). Minutes left in timer key otherwise.
  */
-fun TimerMap.getMinutesLeft(key: TimerKey): Int? = TimeConstants.cyclesToMinutes(get(key))
+fun TimerMap.getMinutesLeft(key: TimerKey): Int? {
+    val cyclesLeft = get(key)
+    val minutes = (cyclesLeft / 100.0).toInt()
+    if (minutes > 0) {
+        return minutes
+    }
+    return null
+}
 
 /**
  * Create an empty [EnumSet] of type [T].

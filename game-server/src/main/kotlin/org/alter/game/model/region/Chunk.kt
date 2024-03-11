@@ -30,6 +30,8 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
 
     internal val blockedTiles = ObjectOpenHashSet<Tile>()
 
+    internal val waterTiles = ObjectOpenHashSet<Tile>()
+
     /**
      * The [Entity]s that are currently registered to the [Tile] key. This is
      * not used for [org.alter.game.model.entity.Pawn], but rather [Entity]s
@@ -74,6 +76,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
 
     fun isClipped(tile: Tile): Boolean = matrices[tile.height].isClipped(tile.x % CHUNK_SIZE, tile.z % CHUNK_SIZE)
 
+    fun isWater(tile: Tile): Boolean = waterTiles.contains(tile)
     fun addEntity(world: World, entity: Entity, tile: Tile) {
         /*
          * Objects will affect the collision map.

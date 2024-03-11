@@ -12,6 +12,7 @@ import org.alter.game.model.queue.QueueTask
 import org.alter.api.InterfaceDestination
 import org.alter.api.Skills
 
+
 /**
  * The child id of the chat box in the gameframe interface. This can change
  * with revision.

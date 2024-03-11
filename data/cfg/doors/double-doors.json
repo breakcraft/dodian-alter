@@ -38,5 +38,16 @@
       "left": 24059,
       "right": 24064
     }
+  },
+  //Yanille
+  { //East Gate
+    "opened": {
+      "left": 17092,
+      "right": 17094
+    },
+    "closed": {
+      "left": 17091,
+      "right": 17093
+    }
   }
 ]

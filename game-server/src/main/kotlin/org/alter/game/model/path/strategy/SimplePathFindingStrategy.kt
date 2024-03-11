@@ -3,6 +3,7 @@ package org.alter.game.model.path.strategy
 import org.alter.game.model.Direction
 import org.alter.game.model.Tile
 import org.alter.game.model.collision.CollisionManager
+import org.alter.game.model.entity.Pawn
 import org.alter.game.model.path.PathFindingStrategy
 import org.alter.game.model.path.PathRequest
 import org.alter.game.model.path.Route
@@ -12,7 +13,7 @@ import java.util.*
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class SimplePathFindingStrategy(collision: CollisionManager) : PathFindingStrategy(collision) {
+class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : PathFindingStrategy(collision) {
 
     // TODO(Tom): redo this whole strategy (used for npcs). Fucking hate how
     // it is atm (jan 27 2019).
@@ -75,7 +76,7 @@ class SimplePathFindingStrategy(collision: CollisionManager) : PathFindingStrate
         for (x in 0 until width) {
             for (z in 0 until length) {
                 val transform = tile.transform(x, z)
-                if (!collision.canTraverse(transform, direction, projectile) || !collision.canTraverse(transform.step(direction), direction.getOpposite(), projectile)) {
+                if (!collision.canTraverse(transform, direction, projectile, water = (pawn.walkMask and 0x4) != 0) || !collision.canTraverse(transform.step(direction), direction.getOpposite(), projectile, water = (pawn.walkMask and 0x4) != 0)) {
                     return false
                 }
             }

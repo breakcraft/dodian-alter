@@ -39,6 +39,11 @@ enum class EntityType {
     MAP_ANIM,
 
     /**
+     * An animation ran in the map.
+     */
+    LOC_ANIM,
+
+    /**
      * An item on the floor.
      */
     GROUND_ITEM,

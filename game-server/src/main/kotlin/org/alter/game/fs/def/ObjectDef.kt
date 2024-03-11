@@ -36,6 +36,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
     var transforms: Array<Int>? = null
     val params = Int2ObjectOpenHashMap<Any>()
     var examine: String? = null
+    var depleted: Int = -1
     var mapIconId = -1
     var aBoolean3429 = true
     var objectModels: IntArray = IntArray(0)
