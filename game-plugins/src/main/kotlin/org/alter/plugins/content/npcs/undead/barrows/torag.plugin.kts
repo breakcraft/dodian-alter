@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.TORAG_THE_CORRUPTED, 3552, 3283, 0, 2);
 spawn_npc(Npcs.TORAG_THE_CORRUPTED, 3551, 3280, 0, 2);

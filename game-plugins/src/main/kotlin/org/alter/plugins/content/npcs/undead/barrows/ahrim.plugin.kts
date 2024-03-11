@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.AHRIM_THE_BLIGHTED, 3565, 3289, 0, 2);
 spawn_npc(Npcs.AHRIM_THE_BLIGHTED, 3563, 3286, 0, 2);

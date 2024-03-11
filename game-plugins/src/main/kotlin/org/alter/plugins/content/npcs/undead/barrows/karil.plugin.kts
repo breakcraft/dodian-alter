@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.KARIL_THE_TAINTED, 3565, 3275, 0, 2);
 spawn_npc(Npcs.KARIL_THE_TAINTED, 3563, 3272, 0, 2);

@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.VERAC_THE_DEFILED, 3557, 3297, 0, 2);
 spawn_npc(Npcs.VERAC_THE_DEFILED, 3559, 3300, 0, 2);

@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.sheep
+package org.alter.plugins.content.npcs.animals.sheep
 
 Sheep.SHEEP_NPCS.forEach { sheep ->
     if (world.definitions.get(NpcDef::class.java, sheep).options.contains("Shear")) {

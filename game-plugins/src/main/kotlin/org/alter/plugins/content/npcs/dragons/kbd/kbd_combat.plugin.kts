@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.kbd
+package org.alter.plugins.content.npcs.dragons.kbd
 
 import org.alter.game.model.combat.AttackStyle
 import org.alter.game.model.combat.CombatClass

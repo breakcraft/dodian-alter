@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.kbd
+package org.alter.plugins.content.npcs.dragons.kbd
 
 set_multi_combat_region(region = 9033)
 

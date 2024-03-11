@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.DHAROK_THE_WRETCHED, 3576, 3298, 0, 2);
 spawn_npc(Npcs.DHAROK_THE_WRETCHED, 3576, 3300, 0, 2);

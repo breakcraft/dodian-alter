@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.sheep
+package org.alter.plugins.content.npcs.animals.sheep
 
 val YELL_DELAY = TimerKey()
 

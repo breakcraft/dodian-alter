@@ -1,4 +1,4 @@
-package org.alter.plugins.content.npcs.barrows
+package org.alter.plugins.content.npcs.undead.barrows
 
 spawn_npc(Npcs.GUTHAN_THE_INFESTED, 3577, 3282, 0, 2);
 spawn_npc(Npcs.GUTHAN_THE_INFESTED, 3579, 3279, 0, 2);

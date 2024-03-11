@@ -154,6 +154,12 @@ object NpcCombatDsl {
         var venomChance = -1.0
 
         /**
+         * The spell an NPC will use if one is set
+         * Note: this is used to signify the NPCs default attack style (magic)
+         */
+        var spell = -1
+
+        /**
          * @TODO
          * Not added yet, need more info.
          * Cannons => If it's immune to cannonBalls or the cannonball ignores these npcs.
