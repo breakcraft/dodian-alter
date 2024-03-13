@@ -11,13 +11,15 @@ Altar.values.forEach { altar ->
 
         // The object definition for the Mysterious Ruins
         val def = world.definitions.get(ObjectDef::class.java, ruin)
-
         // Allow using the talisman on the ruins to enter the altar
         altar.talisman?.let { talisman ->
             on_item_on_obj(obj = ruin, item = talisman) {
-                altar.entrance?.let { player.moveTo(it) }
+                if (player.getVarbit(altar.varbit) == 0) {
+                    altar.entrance?.let { player.moveTo(it) }
+                }
             }
         }
+
 
         // If the object has the 'enter' option, we should check that the varbit is set for the player before teleporting them to the altar
         if (def.options.contains(enterOption)) {
