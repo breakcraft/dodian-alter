@@ -12,7 +12,8 @@ enum class Spin(val id: Int,val prefix: String, val unSpun: Int, val level: Int,
     FLAX(id = Items.BOW_STRING, prefix = "flax", unSpun = Items.FLAX, level = 10, craftXp = 15.0, animation = 894),
     //SINEW(id = Items.CROSSBOW_STRING, prefix = "sinew", unSpun = Items.SINEW, level = 10, craftXp = 15.0, animation = 894),
     //MAGIC_ROOTS(id = Items.MAGIC_STRING, prefix = "magic roots", unSpun = Items.MAGIC_ROOTS, level = 19, craftXp = 30.0, animation = 894),
-    //YAK_HAIR(id = Items.ROPE, prefix = "yak hair", unSpun = Items.HAIR, level = 30, craftXp = 25.0, animation = 894);
+    //YAK_HAIR(id = Items.ROPE, prefix = "yak hair", unSpun = Items.HAIR, level = 30, craftXp = 25.0, animation = 894),
+    ;
 
     companion object {
         /**
