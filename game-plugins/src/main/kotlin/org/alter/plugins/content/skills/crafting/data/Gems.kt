@@ -16,7 +16,8 @@ enum class Gems(val id: Int,val prefix: String, val uncutGem: Int, val level: In
     DIAMOND(id = Items.DIAMOND, prefix = "diamonds", uncutGem = Items.UNCUT_DIAMOND, level = 43, craftXp = 107.5, animation = 885),
     DRAGONSTONE(id = Items.DRAGONSTONE, prefix = "dragonstones", uncutGem = Items.UNCUT_DRAGONSTONE, level = 55, craftXp = 137.5, animation = 885),
     ONYX(id = Items.ONYX, prefix = "onyx", uncutGem = Items.UNCUT_ONYX, level = 67, craftXp = 167.5, animation = 885),
-    //ZENYTE(id = Items.ZENYTE, prefix = "zenytes", uncutGem = Items.UNCUT_ZENYTE, level = 89, craftXp = 200.0, animation = 885);
+    //ZENYTE(id = Items.ZENYTE, prefix = "zenytes", uncutGem = Items.UNCUT_ZENYTE, level = 89, craftXp = 200.0, animation = 885),
+    ;
 
     companion object {
         /**
