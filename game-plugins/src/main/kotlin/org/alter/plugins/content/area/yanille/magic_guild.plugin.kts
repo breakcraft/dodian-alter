@@ -42,8 +42,14 @@ DOORS.forEach { obj ->
 on_obj_option(obj = Objs.LADDER_17384, option = "Climb-Down") {
     player.moveTo(2594, 9486)
 }
-on_obj_option(obj = Objs.LADDER_17385, option = "Climb-Up") {
-    player.moveTo(2594, 3086)
+on_obj_option(obj = Objs.LADDER_17385, option = "Climb-Up")
+{
+    when(player.tile.regionId) {
+        11418 -> { // IceQueen Dungeon
+            player.moveTo(x = 2846, z = 3516)
+        }
+        else ->  player.moveTo(x = 2594, z = 3086) //Magic Guild
+    }
 }
 on_obj_option(obj = Objs.GATE_2154, option = "Open") {
     player.message("The gate is locked")
