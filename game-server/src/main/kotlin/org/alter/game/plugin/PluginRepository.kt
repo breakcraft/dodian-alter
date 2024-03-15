@@ -398,6 +398,16 @@ class PluginRepository(val world: World) {
      */
     internal val services = mutableListOf<Service>()
 
+    /**
+     * A map of [Plugins] that are listening to start fishing bind
+     */
+    internal val onStartFishingPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
+     * A map of [Plugins] that are listening for fish to be caught.
+     */
+    internal val onCatchFishPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
     internal val onAnimList = hashMapOf<Int, Plugin.() -> Unit>()
 
     internal val terminalCommands = hashMapOf<String, Pair<String?, Plugin.() -> Unit>>()
@@ -1366,6 +1376,37 @@ class PluginRepository(val world: World) {
        }
        return ""
    }
+    fun bindOnStartFishing(npc_spot: Int, plugin: Plugin.() -> Unit) {
+        if(onStartFishingPlugins.containsKey(npc_spot)) {
+            val error = IllegalStateException("Start fishing listener already bound to a plugin: npc=$npc_spot")
+            logger.error(error) {}
+            throw error
+        }
+        onStartFishingPlugins[npc_spot] = plugin
+        pluginCount++
+    }
+
+    fun executeOnStartFishing(p: Player, npc_spot: Int): Boolean {
+        val plugin = onStartFishingPlugins[npc_spot] ?: return false
+        p.executePlugin(plugin)
+        return true
+    }
+
+    fun bindOnCatchFish(npc_spot: Int, plugin: Plugin.() -> Unit) {
+        if(onCatchFishPlugins.contains(npc_spot)) {
+            val error = IllegalStateException("Catch fish listener already bound to a plugin: npc=$npc_spot")
+            logger.error(error) {}
+            throw error
+        }
+        onCatchFishPlugins[npc_spot] = plugin
+        pluginCount++
+    }
+
+    fun executeOnCatchFish(p: Player, npc_spot: Int): Boolean {
+        val plugin = onCatchFishPlugins[npc_spot] ?: return false
+        p.executePlugin(plugin)
+        return true
+    }
 
    companion object {
        private val logger = KotlinLogging.logger{}
