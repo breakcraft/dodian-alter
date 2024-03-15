@@ -36,7 +36,7 @@ enum class Altar(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_29090, Objs.MYSTERIOUS_RUINS),
         altar = Objs.ALTAR_34760,
         exitPortal = Objs.PORTAL_34748,
-        talisman = Items.AIR_TALISMAN,
+        talisman = 1438,
         tiara = Items.AIR_TIARA,
         varbit = 607,
         rune = Rune.AIR,
@@ -71,7 +71,8 @@ enum class Altar(
         exitPortal = Objs.PORTAL_34751,
         talisman = Items.EARTH_TALISMAN,
         tiara = Items.EARTH_TIARA,
-        varbit = 610, rune = Rune.EARTH,
+        varbit = 610,
+        rune = Rune.EARTH,
         entrance = Tile(2657, 4830),
         exit = Tile(3302, 3477)
     ),
@@ -98,7 +99,7 @@ enum class Altar(
         exit = Tile(3050, 3442)
     ),
     COSMIC(
-        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_31607, Objs.MYSTERIOUS_RUINS_31725),
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_31607, Objs.MYSTERIOUS_RUINS_31725, Objs.ALTAR_OF_GUTHIX),
         altar = Objs.ALTAR_34766,
         exitPortal = Objs.PORTAL_34754,
         talisman = Items.COSMIC_TALISMAN,
@@ -106,7 +107,8 @@ enum class Altar(
         varbit = 613,
         rune = Rune.COSMIC,
         entrance = Tile(2142, 4813),
-        exit = Tile(2405, 4381)
+        //exit = Tile(2405, 4381)
+        exit = Tile(2924, 3483)
     ),
     CHAOS(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_34742, Objs.MYSTERIOUS_RUINS_34743),
