@@ -34,3 +34,6 @@ on_command("fish", description = "Teleports you to Fishing Guild") {
 on_command("legends", description = "Teleports you to Legends Guild") {
     player.moveTo(Tile(x = 2728, z = 3347, height = 0))
 }
+on_command("dragons", description = "Teleports you to the Dragons Dungeon") {
+    player.moveTo(Tile(x = 3235, z = 9366, height = 0))
+}
