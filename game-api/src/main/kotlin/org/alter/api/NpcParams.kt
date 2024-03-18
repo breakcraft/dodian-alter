@@ -351,9 +351,10 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setSlayerParams(levelReq: Int, xp: Double): NpcCombatBuilder {
+    fun setSlayerParams(levelReq: Int, xp: Double, assignment: SlayerAssignment): NpcCombatBuilder {
         setSlayerRequirement(levelReq)
         setSlayerXp(xp)
+        slayerAssignment = assignment
         return this
     }
 

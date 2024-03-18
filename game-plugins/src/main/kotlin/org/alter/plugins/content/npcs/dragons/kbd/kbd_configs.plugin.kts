@@ -41,10 +41,6 @@ set_combat_def(Npcs.KING_BLACK_DRAGON) {
         death = 92
     }
 
-    slayerData {
-        levelRequirement = 50
-        xp = 258.0
-    }
     /**
      * @TODO Uhh need to implement checks for [Player]
      */
