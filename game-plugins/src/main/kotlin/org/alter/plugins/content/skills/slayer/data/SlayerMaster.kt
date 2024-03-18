@@ -19,13 +19,15 @@ data class Assignment(
     val amount: IntRange = 0..0,
     val requirement: List<Requirement> = emptyList()
 )
-
 enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
-    TURAEL(Npcs.TURAEL, identifier = "Turael", defaultAmount = 15..50),
-    SPRIA(Npcs.SPRIA, identifier = "Spria", defaultAmount = 20..100),
+    TURAEL(Npcs.TURAEL, identifier = "Turael", defaultAmount = 0..0),
+    SPRIA(Npcs.SPRIA, identifier = "Spria", defaultAmount = 0..0),
     VANNAKA(Npcs.VANNAKA, identifier = "Vannaka", defaultAmount = 60..120),
-    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", defaultAmount = 40..70),
-    CHAELDAR(Npcs.CHAELDAR, identifier = "Chaeldar", defaultAmount = 20..100),
+    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", defaultAmount = 10..50),
+    CHAELDAR(Npcs.CHAELDAR, identifier = "Chaeldar", defaultAmount = 0..0),
+    KRYSTILIA(Npcs.KRYSTILIA, identifier = "Krystilia", defaultAmount = 0..0),
+    KONAR(Npcs.KONAR_QUO_MATEN, identifier = "Konar Quo Maten", defaultAmount = 0..0),
+    DURADEL(Npcs.DURADEL, identifier = "Duradel", defaultAmount = 80..180)
 
 
 }
@@ -34,17 +36,28 @@ enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: 
 //TODO: We will also need to add weights so some tasks occur more frequently than others.
 val slayerData = SlayerData(
     mapOf(
-        SlayerMaster.TURAEL to listOf(
+        SlayerMaster.MAZCHNA to listOf(
             Assignment(assignment = SlayerAssignment.CRAWLING_HAND),
-            Assignment(assignment = SlayerAssignment.CAVE_CRAWLER),
-            Assignment(assignment = SlayerAssignment.JELLY),
-            Assignment(assignment = SlayerAssignment.CAVE_SLIME),
-            Assignment(assignment = SlayerAssignment.PYREFIEND),
-            Assignment(assignment = SlayerAssignment.WATERFIEND),
-            Assignment(assignment = SlayerAssignment.WILDDOG),
-            Assignment(assignment = SlayerAssignment.TORTURED_SOUL),
-            Assignment(assignment = SlayerAssignment.MOURNER),
-            Assignment(assignment = SlayerAssignment.DEATHSPAWN),
+            Assignment(
+                assignment = SlayerAssignment.PYREFIEND,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 20),
+                )),
+            Assignment(
+                assignment = SlayerAssignment.DEATHSPAWN,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 30),
+                )),
+            Assignment(
+                assignment = SlayerAssignment.JELLY,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 30),
+                )),
+            Assignment(
+                assignment = SlayerAssignment.MOURNER,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 45),
+                ))
 
             /*Example for level requirments
             Assignment(

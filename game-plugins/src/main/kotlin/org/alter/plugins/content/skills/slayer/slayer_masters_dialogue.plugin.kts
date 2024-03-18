@@ -11,7 +11,7 @@ import org.alter.plugins.content.skills.slayer.data.slayerData
  * @author Alycia <https://github.com/alycii>
  */
 
-val masters = listOf(Npcs.TURAEL, Npcs.SPRIA, Npcs.VANNAKA, Npcs.MAZCHNA, Npcs.CHAELDAR)
+val masters = listOf(Npcs.TURAEL, Npcs.SPRIA, Npcs.KRYSTILIA, Npcs.VANNAKA, Npcs.MAZCHNA, Npcs.KONAR_QUO_MATEN, Npcs.CHAELDAR, Npcs.DURADEL)
 masters.forEach { npcId ->
 
     val slayerMaster = SlayerMaster.values().firstOrNull { it.id == npcId } ?: return@forEach
