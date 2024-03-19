@@ -43,10 +43,16 @@ on_item_option(item = Items.ENCHANTED_GEM, option = "activate") {
     }
 }
 
-//on_item_option(item = Items.ENCHANTED_GEM, option = "kills-left") {
-//    if(player.getSlayerAssignment() == null) {
-//        player.message("You currently do not have a task; speak to a Slayer Master to receive one.")
-//        return@on_item_option
-//    }
-//    player.message("Your current assignment is ${player.getSlayerAssignment()!!.identifier.lowercase()}; only ${player.attr[SLAYER_AMOUNT]} more to go.")
-//}
+on_item_option(item = Items.ENCHANTED_GEM, option = "Check") {
+    if(player.getSlayerAssignment() == null) {
+        player.message("You currently do not have a task; speak to a Slayer Master to receive one.")
+        return@on_item_option
+    }
+    player.message("Your current assignment is ${player.getSlayerAssignment()!!.identifier.lowercase()}. Only ${player.attr[SLAYER_AMOUNT]} more to go.")
+}
+on_item_option(item = Items.ENCHANTED_GEM, option = "Partner") {
+    player.message("This is currently not available")
+}
+on_item_option(item = Items.ENCHANTED_GEM, option = "Log") {
+    player.message("This is currently not available")
+}

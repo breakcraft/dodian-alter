@@ -25,7 +25,12 @@ masters.forEach { npcId ->
                 false -> "Who are you?"
             }
 
-            when (options(firstOption, "Do you have anything for trade?", "Can you teleport me to West Ardougne?", "Er... Nothing...")) {
+            when (options(
+                firstOption,
+                "Do you have anything for trade?",
+                "Can you teleport me to West Ardougne?",
+                "Er... Nothing..."
+            )) {
                 FIRST_OPTION -> {
                     if (player.attr.has(STARTED_SLAYER)) {
                         giveTask(this, slayerMaster)
@@ -54,11 +59,13 @@ masters.forEach { npcId ->
                         }
                     }
                 }
+
                 SECOND_OPTION -> {
                     chatPlayer("Do you have anything for trade?")
                     chatNpc("I have a wide selection of Slayer equipment; take a look!")
                     player.openShop("Slayer Equipment")
                 }
+
                 THIRD_OPTION -> {
                     chatPlayer("Can you Teleport me to West Ardougne?")
                     chatNpc("Sure i can!<br>Here you go!")
@@ -68,6 +75,21 @@ masters.forEach { npcId ->
             }
         }
     }
+    on_npc_option(npc = npcId, option = "Assignment") {
+        player.queue {
+        if (player.attr.has(STARTED_SLAYER)) {
+            giveTask(this, slayerMaster)
+        } else {
+                chatNpc("You dont know how slayer works!<br>Talk to me first if you want to know!")
+            }
+        }
+    }
+    on_npc_option(npc = npcId, option = "Rewards") {
+        player.queue {
+            chatNpc("This is currently not available.")
+        }
+    }
+
 }
 fun teleport(p: Player) {
     p.queue {
@@ -122,7 +144,7 @@ suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
     val player = it.player
 
     if(player.getSlayerAssignment() != null) {
-        it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come<br>>back when you've finished your task.")
+        it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come<br>back when you've finished your task.")
         return
     }
 
