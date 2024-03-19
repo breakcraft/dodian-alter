@@ -48,6 +48,9 @@ on_obj_option(obj = Objs.LADDER_17385, option = "Climb-Up")
         11418 -> { // IceQueen Dungeon
             player.moveTo(x = 2846, z = 3516)
         }
+        11673 -> { // Taverley Dungeon
+            player.moveTo(x = 2884, z = 3398)
+        }
         else ->  player.moveTo(x = 2594, z = 3086) //Magic Guild
     }
 }

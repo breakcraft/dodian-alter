@@ -21,5 +21,12 @@ on_obj_option(obj = Objs.ROCK_SLIDE, option = "Mine") {
 
 //Ice Queen Dungeon Entrance
 on_obj_option(obj = Objs.LADDER_16680, option = "Climb-Down") {
-    player.moveTo(2860, 9919)
+    when (player.tile.regionId) {
+        11573 -> { //Taverley Dungeon
+            player.moveTo(x = 2884, z = 9798)
+        }
+
+        else -> player.moveTo(2860, 9919)
+    }
+
 }
