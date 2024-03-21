@@ -40,7 +40,13 @@ DOORS.forEach { obj ->
 
 //Basement
 on_obj_option(obj = Objs.LADDER_17384, option = "Climb-Down") {
-    player.moveTo(2594, 9486)
+    when(player.tile.regionId) {
+        11317 -> { // Water obelisk
+            player.moveTo(x = 2842, z = 9823)
+        }
+
+        else -> player.moveTo(2594, 9486)
+    }
 }
 on_obj_option(obj = Objs.LADDER_17385, option = "Climb-Up")
 {
@@ -51,6 +57,10 @@ on_obj_option(obj = Objs.LADDER_17385, option = "Climb-Up")
         11673 -> { // Taverley Dungeon
             player.moveTo(x = 2884, z = 3398)
         }
+        11417 -> { // Water obelisk
+            player.moveTo(x = 2842, z = 3423)
+        }
+
         else ->  player.moveTo(x = 2594, z = 3086) //Magic Guild
     }
 }
